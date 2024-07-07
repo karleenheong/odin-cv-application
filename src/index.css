@@ -2,7 +2,55 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Verdana, Tahoma, sans-serif;
 }
+
+h1,
+h2 {
+  padding: 8px;
+  font-family: sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+h2,
+form {
+  text-align: left;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px;
+}
+
+label,
+input,
+p,
+button {
+  font-size: 1.2rem;
+}
+
+input {
+  margin-left: 10px;
+  background-color: whitesmoke;
+  border: none;
+  padding: 2px;
+}
+
+button {
+  align-self: center;
+  border: none;
+  background-color: lightgreen;
+  padding: 10px 20px;
+  border-radius: 8%;
+  margin: 10px;
+  
+}
+
 
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
