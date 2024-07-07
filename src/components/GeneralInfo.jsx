@@ -1,12 +1,12 @@
-import '../styles/GeneralInfo.css';
 import { useState } from 'react';
 
 export default function GeneralInfo() {
-
   const [inputs, setInputs] = useState({
     name: "", 
     email: "", 
     phone: ""});
+
+  const[isEditable, setIsEditable] = useState(true);
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -18,11 +18,9 @@ export default function GeneralInfo() {
     e.preventDefault();
   }
 
-  const[isEditable, setIsEditable] = useState(true);
-
   return (
     <>
-      <h2>General Information</h2>
+      <h2 className="general">General Information</h2>
       {isEditable ? (
          <form onSubmit={handleSubmit}>
          <label>Name:
@@ -34,14 +32,14 @@ export default function GeneralInfo() {
          <label>Phone:
            <input type="tel" name="phone" value={inputs.phone} onChange={handleChange}/>
            </label>
-         <button type="submit" onClick={() => setIsEditable(false)}>Submit</button>
+         <button type="submit" onClick={() => setIsEditable(false)}>Submit General</button>
        </form>
       ) : (
         <div>
           <p>Name: {inputs.name}</p>
           <p>Email: {inputs.email}</p>
           <p>Phone: {inputs.phone}</p>
-          <button onClick={() => setIsEditable(true)}>Edit</button>
+          <button type="submit" onClick={() => setIsEditable(true)}>Edit</button>
         </div>
       )}
     </>
