@@ -9,6 +9,7 @@ function App() {
 
   return (
     <>
+      <h1>CV Application App</h1>
       <GeneralInfo />
 
       {/* <div>
