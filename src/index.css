@@ -15,9 +15,18 @@ h1 {
   text-align: center;
 }
 
+h2 {
+  color: darkgreen;
+}
+
 h2,
 form {
   text-align: left;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
 }
 
 form {
@@ -34,6 +43,10 @@ button {
   font-size: 1.2rem;
 }
 
+p {
+  margin: 8px;
+}
+
 input {
   margin-left: 10px;
   background-color: whitesmoke;
@@ -48,7 +61,6 @@ button {
   padding: 10px 20px;
   border-radius: 8%;
   margin: 10px;
-  
 }
 
 
