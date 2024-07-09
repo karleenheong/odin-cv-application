@@ -3,7 +3,9 @@ import { useState } from "react";
 export default function Experience() {
   const [jobs, setJobs] = useState([]);
 
-  const [inputs, setInputs] = useState({id: -1, isEditable: true, companyName: "", positionTitle: "", responsibilities: "", dateStarted: "", dateUntil: ""});
+  const [inputs, setInputs] = useState({id: -1, companyName: "", positionTitle: "", responsibilities: "", dateStarted: "", dateUntil: ""});
+
+  const [isEditingSection, setIsEditingSection] = useState(false);
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -26,7 +28,6 @@ export default function Experience() {
     // reset inputs
     setInputs({
       id: -1,
-      isEditable: true,
       companyName: "",
       positionTitle: "",
       responsibilities: "",
@@ -36,7 +37,9 @@ export default function Experience() {
   };
 
   const handleEdit = (job) => {
-    setInputs({ ...job, isEditable: true});
+    setInputs(job);
+    setJobs(jobs.map((j) => 
+      j.id === job.id ? { ...j, isEditable: true} : { ...j, isEditable: false}));
   };
 
   return (
@@ -62,7 +65,7 @@ export default function Experience() {
               <label>Date Finished:
                 <input type="date" name="dateUntil" value={inputs.dateUntil} onChange={handleChange}/>
               </label>
-              <button type="submit">Finish Editing</button>
+              <button type="submit" onClick={() => {setIsEditingSection(false)}}>Finish Editing</button>
             </form>
           ) : (
             <div>
@@ -71,30 +74,37 @@ export default function Experience() {
               <p>Responsibilities: {job.responsibilities}</p>
               <p>Date Started: {job.dateStarted}</p>
               <p>Date Finished: {job.dateUntil}</p>
-              <button type="submit" onClick={() => handleEdit(job)}>Edit Job</button>
+              <button type="submit" onClick={() => {
+                handleEdit(job); 
+                setIsEditingSection(true);
+                }}>Edit Job</button>
             </div>
           )}
         </div>
       ))}
 
-      <form onSubmit={handleSubmit}>
-        <label>Company Name:
-          <input type="text" name="companyName" value={inputs.companyName} onChange={handleChange}/>
-        </label>
-        <label>Position Title:
-          <input type="text" name="positionTitle" value={inputs.positionTitle} onChange={handleChange}/>
-        </label>
-        <label>Responsibilities:
-          <input type="text" name="responsibilities" value={inputs.responsibilities} onChange={handleChange}/>
-        </label>
-        <label>Date Started:
-          <input type="date" name="dateStarted" value={inputs.dateStarted} onChange={handleChange}/>
-        </label>
-        <label>Date Finished:
-          <input type="date" name="dateUntil" value={inputs.dateUntil} onChange={handleChange}/>
-        </label>
-        <button type="submit">Add Job</button>
-      </form>
+      {(!isEditingSection) &&
+        (<form onSubmit={handleSubmit}>
+          <label>Company Name:
+            <input type="text" name="companyName" value={inputs.companyName} onChange={handleChange}/>
+          </label>
+          <label>Position Title:
+            <input type="text" name="positionTitle" value={inputs.positionTitle} onChange={handleChange}/>
+          </label>
+          <label>Responsibilities:
+            <input type="text" name="responsibilities" value={inputs.responsibilities} onChange={handleChange}/>
+          </label>
+          <label>Date Started:
+            <input type="date" name="dateStarted" value={inputs.dateStarted} onChange={handleChange}/>
+          </label>
+          <label>Date Finished:
+            <input type="date" name="dateUntil" value={inputs.dateUntil} onChange={handleChange}/>
+          </label>
+          <button type="submit">Add Job</button>
+        </form>)
+      }
+
+      
 
     </div>
   );
